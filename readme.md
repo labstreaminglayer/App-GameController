@@ -1,6 +1,6 @@
 == Usage ==
 
-This program should work out of the box from Windows Vista onward, and will run on older Windows versions if you have the DirectX 9.0c (or later) runtime installed (available from Microsoft at http://www.microsoft.com/en-us/download/details.aspx?id=35). The application should support any game controller (joysticks, steering wheels, gamepads) that is compatible with DirectX. The program provides two streams, one for button-press events and another one for the axis values.
+This program should work out of the box from Windows Vista up to Windows 10, and will run on older Windows versions if you have the DirectX 9.0c (or later) runtime installed (available from Microsoft at http://www.microsoft.com/en-us/download/details.aspx?id=35).  The application should support any game controller (joysticks, steering wheels, gamepads) that is compatible with DirectX. The program provides two streams, one for button-press events and another one for the axis values.
 
   * Make sure that your controller is plugged in an recognized by Windows.
 
