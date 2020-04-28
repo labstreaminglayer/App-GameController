@@ -1,8 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Fri Aug 3 02:05:04 2012
-**      by: Qt User Interface Compiler version 4.8.1
+** Created by: Qt User Interface Compiler version 5.14.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -11,22 +10,20 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QComboBox>
-#include <QtGui/QFormLayout>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QMainWindow>
-#include <QtGui/QMenu>
-#include <QtGui/QMenuBar>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QStatusBar>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QFormLayout>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
+#include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QStatusBar>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -78,6 +75,7 @@ public:
         formLayout->setWidget(0, QFormLayout::LabelRole, label);
 
         deviceSelector = new QComboBox(centralWidget);
+        deviceSelector->addItem(QString());
         deviceSelector->setObjectName(QString::fromUtf8("deviceSelector"));
 
         formLayout->setWidget(0, QFormLayout::FieldRole, deviceSelector);
@@ -128,18 +126,16 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Game Controller Connector", 0, QApplication::UnicodeUTF8));
-        actionLoad_Configuration->setText(QApplication::translate("MainWindow", "Load Configuration", 0, QApplication::UnicodeUTF8));
-        actionSave_Configuration->setText(QApplication::translate("MainWindow", "Save Configuration", 0, QApplication::UnicodeUTF8));
-        actionQuit->setText(QApplication::translate("MainWindow", "Quit", 0, QApplication::UnicodeUTF8));
-        actionQuit_2->setText(QApplication::translate("MainWindow", "Quit", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("MainWindow", "Select Device", 0, QApplication::UnicodeUTF8));
-        deviceSelector->clear();
-        deviceSelector->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "(any)", 0, QApplication::UnicodeUTF8)
-        );
-        linkButton->setText(QApplication::translate("MainWindow", "Link", 0, QApplication::UnicodeUTF8));
-        menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Game Controller Connector", nullptr));
+        actionLoad_Configuration->setText(QCoreApplication::translate("MainWindow", "Load Configuration", nullptr));
+        actionSave_Configuration->setText(QCoreApplication::translate("MainWindow", "Save Configuration", nullptr));
+        actionQuit->setText(QCoreApplication::translate("MainWindow", "Quit", nullptr));
+        actionQuit_2->setText(QCoreApplication::translate("MainWindow", "Quit", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Select Device", nullptr));
+        deviceSelector->setItemText(0, QCoreApplication::translate("MainWindow", "(any)", nullptr));
+
+        linkButton->setText(QCoreApplication::translate("MainWindow", "Link", nullptr));
+        menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
     } // retranslateUi
 
 };

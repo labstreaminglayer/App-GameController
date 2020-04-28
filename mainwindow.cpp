@@ -66,11 +66,11 @@ BOOL CALLBACK MainWindow::controller_enum_callback(const DIDEVICEINSTANCE* pdidI
 
 BOOL CALLBACK MainWindow::on_controller(const DIDEVICEINSTANCE* pdidInstance) {
 	wchar_t *bstrGuid = NULL;
-	StringFromCLSID(pdidInstance->guidInstance,&bstrGuid);
+    StringFromCLSID(pdidInstance->guidInstance,&bstrGuid);
 	indexToInstance_.insert(boost::bimap<int,std::wstring>::value_type(ui->deviceSelector->count(),std::wstring(bstrGuid)));
 	char instance_name[4096]; wcstombs(instance_name,pdidInstance->tszInstanceName,sizeof(instance_name));
 	ui->deviceSelector->addItem(instance_name);
-	::CoTaskMemFree(bstrGuid);
+    ::CoTaskMemFree(bstrGuid);
 	return DIENUM_CONTINUE;
 }
 
@@ -168,8 +168,8 @@ void MainWindow::link() {
 			std::wstring guidstr = indexToInstance_.left.at(ui->deviceSelector->currentIndex());
 			std::string name = ui->deviceSelector->itemText(ui->deviceSelector->currentIndex()).toStdString();
 			GUID guid;
-			if (FAILED(hr=CLSIDFromString((LPOLESTR)guidstr.c_str(),&guid)))
-				throw std::runtime_error("Did not find the selected device. Is it plugged in?");
+            if (FAILED(hr=CLSIDFromString((LPOLESTR)guidstr.c_str(),&guid)))
+                throw std::runtime_error("Did not find the selected device. Is it plugged in?");
 
 		    // Obtain an interface to the selected joystick
 			if (FAILED(hr=pDI->CreateDevice(guid,&pController,NULL)))
@@ -180,7 +180,7 @@ void MainWindow::link() {
 				throw std::runtime_error("Could not select data format for the controller. The controller might not be fully compatible with DirectInput.");
 
 			// set cooperative level
-		    if (FAILED(hr=pController->SetCooperativeLevel(winId(), DISCL_BACKGROUND | DISCL_NONEXCLUSIVE)))
+		    if (FAILED(hr=pController->SetCooperativeLevel(HWND(winId()), DISCL_BACKGROUND | DISCL_NONEXCLUSIVE)))
 				throw std::runtime_error("Could not set cooperative level for the device. There might be another application running that demands exclusive access to the device.");
 
 			// try to enumerate the device features; we'll do this to set the ranges for the axes
