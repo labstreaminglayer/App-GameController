@@ -166,7 +166,6 @@ void MainWindow::link() {
 		try {
 			// get the UI parameters (selected GUID)
 			std::wstring guidstr = indexToInstance_.left.at(ui->deviceSelector->currentIndex());
-			std::string name = ui->deviceSelector->itemText(ui->deviceSelector->currentIndex()).toStdString();
 			GUID guid;
             if (FAILED(hr=CLSIDFromString((LPOLESTR)guidstr.c_str(),&guid)))
                 throw std::runtime_error("Did not find the selected device. Is it plugged in?");
@@ -193,7 +192,7 @@ void MainWindow::link() {
 
 			// start reading
 			stop_ = false;
-			reader_thread_.reset(new boost::thread(&MainWindow::read_thread,this,name));
+			reader_thread_.reset(new boost::thread(&MainWindow::read_thread,this, "game_controller_"));
 		}
 		catch(std::exception &e) {
 			QMessageBox::critical(this,"Error",(std::string("Could not initialize the GameController interface: ")+=e.what()).c_str(),QMessageBox::Ok);
@@ -407,7 +406,7 @@ void MainWindow::read_thread(std::string name) {
 				}
 			}
 		}		
-		boost::this_thread::sleep(t_start + boost::posix_time::millisec((++t)*16));
+		boost::this_thread::sleep_for(boost::chrono::milliseconds(16));
 	}
 }
 
