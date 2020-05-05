@@ -7,9 +7,9 @@ This fork of the original LSL GameController App is built for Xbox controllers o
   * Start the GameController app. You should see a window like the following.
 >![gamecontroller.png](gamecontroller.png)
 
-  * Select the desired controller from the list (it should show any currently connected and supported controller).
-
   * Click the "Link" button to link the app to the lab network. If successful, the button should turn into "Unlink". If a firewall complains, allow the app to connect to the network.
+  
+  * Your Xbox devices will appear in the list, if you have more than one connected, select the one you want to use.
 
   * You should now have two streams on your lab network, one with name "NameofyourdeviceButtons" and type "Markers" and another one with name "NameofyourdeviceAxes" and type "Position". Note that you cannot close the app while it is linked. The app by default streams all possible axes that a controller might have, although only those axes that are actually present in the device in will deliver non-zero values. The button events are of the form: 
 
