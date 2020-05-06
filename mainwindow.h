@@ -31,7 +31,8 @@ class MainWindow : public QMainWindow
     
 public:
     explicit MainWindow(QWidget *parent, const std::string &config_file);
-    ~MainWindow();
+	void detectButtonPress(int index, bool isPressed, double now, bool wasPressed[], lsl::stream_outlet* outletButtons);
+	~MainWindow();
     
 private slots:
     // config file dialog ops (from main menu)

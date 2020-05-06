@@ -108,7 +108,6 @@ void MainWindow::load_config(const std::string &filename) {
 	try {
 		read_xml(filename, pt);
 	} catch(std::exception &e) {
-		QMessageBox::information(this,"Error",(std::string("Cannot read config file: ")+= e.what()).c_str(),QMessageBox::Ok);
 		return;
 	}
 
@@ -255,131 +254,32 @@ void MainWindow::read_thread(std::string name) {
 
 			outletAxes.push_sample(sample, now);
 
-			// generate the button-event samples...
-			if (!waspressed[0] && state.IsAPressed()) {
-				waspressed[0] = true;
-				float buttonValue = 0;
-				outletButtons.push_sample(&buttonValue, now);
-			} else if (waspressed[0] && !state.IsAPressed()) {
-				waspressed[0] = false;
+			// populate the buttons we want to test
+			bool buttonStates[] = { state.IsAPressed(), state.IsBPressed(), state.IsXPressed(), state.IsYPressed(), state.IsDPadDownPressed(), state.IsDPadLeftPressed(), state.IsDPadRightPressed(),
+				state.IsDPadUpPressed(), state.IsLeftShoulderPressed(), state.IsRightShoulderPressed(), state.IsStartPressed(), state.IsLeftStickPressed(), state.IsRightStickPressed(), state.IsBackPressed() };
+
+			// Call detectButtonPress for each button
+			for (unsigned int i = 0; i < sizeof(buttonStates); i++) {
+				detectButtonPress(i, buttonStates[i], now, waspressed, &outletButtons);
 			}
 
-			if (!waspressed[1] && state.IsBPressed()) {
-
-				waspressed[1] = true;
-				float buttonValue = 1;
-				outletButtons.push_sample(&buttonValue, now);
-			} else if (waspressed[1] && !state.IsBPressed()) {
-				waspressed[1] = false;
-			}
-
-
-			if (!waspressed[2] && state.IsXPressed()) {
-
-				waspressed[2] = true;
-				float buttonValue = 2;
-				outletButtons.push_sample(&buttonValue, now);
-			} else if (waspressed[2] && !state.IsXPressed()) {
-				waspressed[2] = false;
-			}
-
-
-			if (!waspressed[3] && state.IsYPressed()) {
-
-				waspressed[3] = true;
-				float buttonValue = 3;
-				outletButtons.push_sample(&buttonValue, now);
-			} else if (waspressed[3] && !state.IsYPressed()) {
-				waspressed[3] = false;
-			}
-
-			if (!waspressed[4] && state.IsDPadDownPressed()) {
-
-				waspressed[4] = true;
-				float buttonValue = 4;
-				outletButtons.push_sample(&buttonValue, now);
-			} else if (waspressed[4] && !state.IsDPadDownPressed()) {
-				waspressed[4] = false;
-			}
-
-			if (!waspressed[5] && state.IsDPadLeftPressed()) {
-
-				waspressed[5] = true;
-				float buttonValue = 5;
-				outletButtons.push_sample(&buttonValue, now);
-			} else if (waspressed[5] && !state.IsDPadLeftPressed()) {
-				waspressed[5] = false;
-			}
-
-			if (!waspressed[6] && state.IsDPadRightPressed()) {
-
-				waspressed[6] = true;
-				float buttonValue = 6;
-				outletButtons.push_sample(&buttonValue, now);
-			} else if (waspressed[6] && !state.IsDPadRightPressed()) {
-				waspressed[6] = false;
-			}
-
-			if (!waspressed[7] && state.IsDPadUpPressed()) {
-
-				waspressed[7] = true;
-				float buttonValue = 7;
-				outletButtons.push_sample(&buttonValue, now);
-			} else if (waspressed[7] && !state.IsDPadUpPressed()) {
-				waspressed[7] = false;
-			}
-
-			if (!waspressed[8] && state.IsLeftShoulderPressed()) {
-
-				waspressed[8] = true;
-				float buttonValue = 8;
-				outletButtons.push_sample(&buttonValue, now);
-			} else if (waspressed[8] && !state.IsLeftShoulderPressed()) {
-				waspressed[8] = false;
-			}
-
-			if (!waspressed[9] && state.IsRightShoulderPressed()) {
-
-				waspressed[9] = true;
-				float buttonValue = 9;
-				outletButtons.push_sample(&buttonValue, now);
-			} else if (waspressed[9] && !state.IsRightShoulderPressed()) {
-				waspressed[9] = false;
-			}
-
-			if (!waspressed[10] && state.IsStartPressed()) {
-
-				waspressed[10] = true;
-				float buttonValue = 10;
-				outletButtons.push_sample(&buttonValue, now);
-			} else if (waspressed[10] && !state.IsStartPressed()) {
-				waspressed[10] = false;
-			}
-
-
-			if (!waspressed[11] && state.IsLeftStickPressed()) {
-
-				waspressed[11] = true;
-				float buttonValue = 11;
-				outletButtons.push_sample(&buttonValue, now);
-			} else if (waspressed[11] && !state.IsLeftStickPressed()) {
-				waspressed[11] = false;
-			}
-
-
-
-			if (!waspressed[12] && state.IsRightStickPressed()) {
-
-				waspressed[12] = true;
-				float buttonValue = 12;
-				outletButtons.push_sample(&buttonValue, now);
-			} else if (waspressed[12] && !state.IsRightStickPressed()) {
-				waspressed[12] = false;
-			}
 		}
 
 			
 		boost::this_thread::sleep_for(boost::chrono::milliseconds(16));
+	}
+
+}
+
+// Detect if button state is pressed, trigger sample to LSL outlet if so, wait for release before resending any button data
+void MainWindow::detectButtonPress(int index, bool isPressed, double now, bool wasPressed[], lsl::stream_outlet* outletButtons) {
+	if (!wasPressed[index] && isPressed) {
+
+		wasPressed[index] = true;
+		outletButtons->push_sample(&index, now);
+	}
+	else if (wasPressed[12] && !isPressed) {
+		wasPressed[12] = false;
 	}
 }
 
