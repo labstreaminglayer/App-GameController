@@ -314,8 +314,8 @@ void MainWindow::read_thread(std::string name) {
 			if (!waspressed[6] && state.IsDPadRightPressed()) {
 
 				waspressed[6] = true;
-				std::string text("Dpad Right pressed");
 				float buttonValue = 6;
+				outletButtons.push_sample(&buttonValue, now);
 			} else if (waspressed[6] && !state.IsDPadRightPressed()) {
 				waspressed[6] = false;
 			}
@@ -323,8 +323,8 @@ void MainWindow::read_thread(std::string name) {
 			if (!waspressed[7] && state.IsDPadUpPressed()) {
 
 				waspressed[7] = true;
-				std::string text("Dpad Up pressed");
 				float buttonValue = 7;
+				outletButtons.push_sample(&buttonValue, now);
 			} else if (waspressed[7] && !state.IsDPadUpPressed()) {
 				waspressed[7] = false;
 			}
@@ -332,8 +332,8 @@ void MainWindow::read_thread(std::string name) {
 			if (!waspressed[8] && state.IsLeftShoulderPressed()) {
 
 				waspressed[8] = true;
-				std::string text("Left Shoulder pressed");
 				float buttonValue = 8;
+				outletButtons.push_sample(&buttonValue, now);
 			} else if (waspressed[8] && !state.IsLeftShoulderPressed()) {
 				waspressed[8] = false;
 			}
@@ -341,8 +341,8 @@ void MainWindow::read_thread(std::string name) {
 			if (!waspressed[9] && state.IsRightShoulderPressed()) {
 
 				waspressed[9] = true;
-				std::string text("Right Shoulder pressed");
 				float buttonValue = 9;
+				outletButtons.push_sample(&buttonValue, now);
 			} else if (waspressed[9] && !state.IsRightShoulderPressed()) {
 				waspressed[9] = false;
 			}
@@ -350,8 +350,8 @@ void MainWindow::read_thread(std::string name) {
 			if (!waspressed[10] && state.IsStartPressed()) {
 
 				waspressed[10] = true;
-				std::string text("Button Start pressed");
 				float buttonValue = 10;
+				outletButtons.push_sample(&buttonValue, now);
 			} else if (waspressed[10] && !state.IsStartPressed()) {
 				waspressed[10] = false;
 			}
@@ -360,8 +360,8 @@ void MainWindow::read_thread(std::string name) {
 			if (!waspressed[11] && state.IsLeftStickPressed()) {
 
 				waspressed[11] = true;
-				std::string text("Left Stick pressed");
 				float buttonValue = 11;
+				outletButtons.push_sample(&buttonValue, now);
 			} else if (waspressed[11] && !state.IsLeftStickPressed()) {
 				waspressed[11] = false;
 			}
@@ -371,8 +371,8 @@ void MainWindow::read_thread(std::string name) {
 			if (!waspressed[12] && state.IsRightStickPressed()) {
 
 				waspressed[12] = true;
-				std::string text("Right Stick pressed");
 				float buttonValue = 12;
+				outletButtons.push_sample(&buttonValue, now);
 			} else if (waspressed[12] && !state.IsRightStickPressed()) {
 				waspressed[12] = false;
 			}
