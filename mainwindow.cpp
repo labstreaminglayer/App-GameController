@@ -203,7 +203,7 @@ void MainWindow::read_thread(std::string name) {
 	lsl::stream_outlet outletButtons(infoButtons);
 
 	// create streaminfo and outlet for the axes
-	lsl::stream_info infoAxes(name + "Axes","Position",6,60,lsl::cf_float32,name + "_Axes_" + boost::asio::ip::host_name());
+	lsl::stream_info infoAxes(name + "Axes","Position",6,500,lsl::cf_float32,name + "_Axes_" + boost::asio::ip::host_name());
 	// append some meta-data...
 	lsl::xml_element channels = infoAxes.desc().append_child("channels");
 	channels.append_child("channel")
@@ -266,7 +266,7 @@ void MainWindow::read_thread(std::string name) {
 		}
 
 			
-		boost::this_thread::sleep_for(boost::chrono::milliseconds(16));
+		boost::this_thread::sleep_for(boost::chrono::milliseconds(2));
 	}
 
 }
