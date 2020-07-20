@@ -1,3 +1,9 @@
+== Update ==
+
+Gamepad (e.g. XBox controller) users should use the new [Gamepad App](https://github.com/labstreaminglayer/App-Gamepad).
+
+For joystick users, this GameController application might still be the best option. However, it may be impossible to build because it uses the now-deprected DirectInput API. Go directly to the [release page](https://github.com/labstreaminglayer/App-GameController/releases) and try the old build from there.
+
 == Usage ==
 
 This program should work out of the box from Windows Vista onward, and will run on older Windows versions if you have the DirectX 9.0c (or later) runtime installed (available from Microsoft at http://www.microsoft.com/en-us/download/details.aspx?id=35). The application should support any game controller (joysticks, steering wheels, gamepads) that is compatible with DirectX. The program provides two streams, one for button-press events and another one for the axis values.
